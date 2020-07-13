@@ -1,0 +1,46 @@
+<ng-container *ngIf="event">
+    <div class="row justify-content-center mt-4">
+        <div class="card">
+            <div class="row">
+                <div class="col-5">
+                    <img src='{{"assets/"+event.category+".jpg"}}' class="img-fluid w-100" alt="Event Details Image">
+                </div>
+                <div class="col">
+                    <div class="card-block px-2 mt-4">
+                        <h1 class="card-title">{{event.title}}
+                            <ng-container *ngIf="event.owner.username !=  user.username">
+                                <mat-icon title="mark as interest"
+                                    *ngIf="event.interestedUsers.indexOf(user.username) < 0"
+                                    (click)="markAsInterest(event)">favorite_border</mat-icon>
+                                <mat-icon title="mark as interest"
+                                    *ngIf="event.interestedUsers.indexOf(user.username) >= 0"
+                                    (click)="removeInterest(event)">favorite</mat-icon>
+                            </ng-container>
+                        </h1>
+
+                        <p class="card-text">{{event.description}}</p>
+                        <p>{{event.startDate | date : 'fullDate'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer w-100 text-muted">
+                <ng-container *ngIf="event.owner.username !=  user.username;else ownerBtns">
+                    <button *ngIf="event.joinedUsers.indexOf(user.username) < 0" class="btn btn-success"
+                        (click)="join(event)">Join Me</button>
+                    <button *ngIf="event.joinedUsers.indexOf(user.username) >= 0" class="btn btn-danger"
+                        (click)="disjoin(event)">Disjoin</button>
+                </ng-container>
+                <ng-template #ownerBtns>
+                    <ng-container *ngIf="event.cancelled">
+                        <h1 style="color:red">Cancelled</h1>
+                    </ng-container>
+                    <ng-container *ngIf="!event.cancelled">
+                        <a class="btn btn-primary" routerLink="/events/edit/{{event.id}}">Edit Event</a>
+                        <button class="btn btn-danger ml-2" (click)="cancel(event)">Cancel</button>
+                    </ng-container>
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+</ng-container>

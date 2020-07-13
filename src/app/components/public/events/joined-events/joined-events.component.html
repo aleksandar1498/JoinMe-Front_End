@@ -1,0 +1,52 @@
+<h1>Joined by me</h1>
+<div class="row justify-content-center">
+    <div *ngFor="let event of events" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+        <div class="card h-100">
+            <h3 class="card-header"><a [routerLink]="['/events',event.id]">{{event.title}}</a>
+                <ng-container *ngIf="event.owner.username !=  user.username">
+                    <mat-icon title="mark as interest" *ngIf="event.interestedUsers.indexOf(user.username) < 0"
+                        (click)="markAsInterest(event)">favorite_border</mat-icon>
+                    <mat-icon title="mark as interest" *ngIf="event.interestedUsers.indexOf(user.username) >= 0"
+                        (click)="removeInterest(event)">favorite</mat-icon>
+                </ng-container>
+            </h3>
+            <div class="row card-img-container">
+                <div class="col-12 my-auto">
+                    <img class="card-img-top w-100 mh-100" src='{{"assets/"+event.category+".jpg"}}'
+                        alt="Card image cap">
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <p class="card-text">{{event.description}}</p>
+                <p>{{event.startDate | date : 'fullDate'}}</p>
+                <div class="row">
+                    <ng-container *ngIf="event.owner.username !=  user.username;else ownerBtns">
+                        <div *ngIf="event.joinedUsers.indexOf(user.username) < 0" class="col-6 w-100"><button
+                                class="btn btn-success w-100" (click)="join(event)">Join Me</button></div>
+                        <div *ngIf="event.joinedUsers.indexOf(user.username) >= 0" class="col-6 w-100"><button
+                                class="btn btn-danger w-100" (click)="disjoin(event)">Disjoin</button></div>
+
+                    </ng-container>
+                    <ng-template #ownerBtns>
+                        <div class="col-6 w-100"> <a class="btn btn-primary w-100"
+                                routerLink="/events/edit/{{event.id}}">Edit</a></div>
+                        <div class="col-6 w-100"> <button class="btn btn-danger w-100 ml-2"
+                                (click)="cancel(event)">Cancel</button></div>
+
+
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="events?.length === 0">
+        <i>
+            <h1>You do not have joined any events, find an event for you by a simple click <i><a
+                        [routerLink]="['/events']">Events</a></i></h1>
+        </i>
+    </div>
+
+</div>

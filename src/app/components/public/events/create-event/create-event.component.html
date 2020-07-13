@@ -1,0 +1,63 @@
+<div class="col-md-4 offset-md-4 mt-8">
+    <form [formGroup]="createEventForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" formControlName="title">
+        </mat-form-field>
+        <mat-error *ngIf="createEventForm.get('title').errors?.serverError">
+            {{ createEventForm.get('title').errors?.serverError }}
+        </mat-error>
+        <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              <mat-option>-- None --</mat-option>
+              <mat-optgroup *ngFor="let city of locations | keyvalue" [label]="city.key" >
+               <mat-option *ngFor="let loc of city.value" [value]="loc">
+                  {{loc.address}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-error *ngIf="createEventForm.get('location').errors?.serverError">
+            {{ createEventForm.get('location').errors?.serverError }}
+        </mat-error>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option>-- None --</mat-option>
+              <mat-option *ngFor="let category of eventCategories   " [value]="category">
+                {{category.replace('_',' ')}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="createEventForm.get('category').errors?.serverError">
+            {{ createEventForm.get('category').errors?.serverError }}
+        </mat-error>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descritpion</mat-label>
+            <input matInput type="description" formControlName="description">
+        </mat-form-field>
+        <mat-error *ngIf="createEventForm.get('description').errors?.serverError">
+            {{ createEventForm.get('description').errors?.serverError }}
+        </mat-error>
+        <mat-form-field appearance="outline">
+            <mat-label>Choose the start date</mat-label>
+            <input formControlName="startDate" matInput type="datetime-local">
+        </mat-form-field>
+        <mat-error *ngIf="createEventForm.get('startDate').errors?.serverError">
+            {{ createEventForm.get('startDate').errors?.serverError }}
+        </mat-error>
+        <mat-form-field appearance="outline">
+            <mat-label>Choose the end date</mat-label>
+            <input formControlName="endDate" matInput type="datetime-local">
+        </mat-form-field>
+        <mat-error *ngIf="createEventForm.get('endDate').errors?.serverError">
+            {{ createEventForm.get('endDate').errors?.serverError }}
+        </mat-error>
+        <br>
+        <button mat-raised-button class="mt-3" (click)="create()">Create</button>
+    </form>
+</div>

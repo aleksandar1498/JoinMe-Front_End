@@ -1,0 +1,49 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.invalid-data {
+    color: red;
+    font-size: 0.95em;
+}
+
+.card-header .mat-icon {
+    float: right;
+    cursor: pointer;
+}
+
+.card {
+    min-width: 15em;
+    min-height: 25em;
+}
+
+.card button {
+    padding: 5px;
+}
+
+.card-img-container {
+    min-height: 14em;
+}
+
+/*
+    Media screens
+*/
+
+@media only screen and (max-width: 576px) {
+    .card-img-container {
+        min-height: 17em;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 767px) {
+    .card-img-container {
+        min-height: 17em;
+    }
+}
