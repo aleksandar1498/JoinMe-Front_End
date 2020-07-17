@@ -1,0 +1,32 @@
+.dashboard{
+    color: white;
+    text-shadow: 0px 3px 4px #796464;
+}
+.dashboard-item{
+    margin: 2em;
+    cursor: pointer;
+    border: none;
+    box-shadow: 2px 3px 7px 0px #393838;
+}
+.dashboard-item:hover{
+    box-shadow: 2px 3px 12px 0px #393838;
+}
+.dashboard-item.blue{
+    background: #6596c79e;
+}
+
+.dashboard-item.red{
+    background: #da3b3bd1;
+}
+
+.dashboard-item.green{
+    background: #9dc7659e;
+}
+
+.dashboard-item.yellow{
+    background: #ece8699e;
+}
+
+.material-icons{
+    font-size: 10em;
+}

@@ -2,6 +2,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -16,7 +17,7 @@ export class JwtAuthorization implements HttpInterceptor {
         // add auth header with jwt if user is logged in and request is to api url
         const currentUser = this.authenticationService.currentUserValue;
         const isLoggedIn = currentUser && currentUser.token;
-        const isApiUrl = req.url.startsWith("http://localhost:8080");
+        const isApiUrl = req.url.startsWith(environment.resturl);
         if (isLoggedIn && isApiUrl) {
             req = req.clone({
                 setHeaders: {

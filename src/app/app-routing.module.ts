@@ -13,6 +13,7 @@ import { LocationsComponent } from './components/public/locations/locations.comp
 import { EditEventComponent } from './components/public/events/edit-event/edit-event.component';
 import { IndexComponent } from './components/index/index.component';
 import { ProfileComponent } from './components/public/user/profile/profile/profile.component';
+import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: 'admin', component: AdminComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['ADMIN']
     },
+  },
+  {
+    path: 'admin/accounts/roles', component: RoleManagerComponent, canActivate : [RoleAuthGuardService] , data: {
+      expectedRoles: ['ADMIN']
+    }
   },
   {
     path: 'profile', component: ProfileComponent, canActivate: [RoleAuthGuardService], data: {

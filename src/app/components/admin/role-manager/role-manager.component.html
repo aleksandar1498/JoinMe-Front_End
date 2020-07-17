@@ -1,0 +1,45 @@
+
+<mat-table [dataSource]="users">
+    <!-- User name Definition -->
+    <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+    </ng-container>
+
+    <!-- Age Definition -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Title Definition -->
+    <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef> Surname </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.surname}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+        <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.roles}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button (click)="showDialog($event,row)" mat-button color="primary"><span class="material-icons">
+                    edit
+                </span></button>
+        </mat-cell>
+    </ng-container>
+
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="['username','name','surname', 'email','roles','edit']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['username','name','surname', 'email','roles','edit']"></mat-row>
+</mat-table>

@@ -1,7 +1,8 @@
-FROM node:13.3.0 AS compile-image
+FROM node:latest AS build
+WORKDIR /joinme
+COPY . .
+RUN npm install
+RUN npm run build
 
-ENV PATH="./node_modules/.bin:$PATH" 
-
-COPY . ./
-
-RUN ng build --configuration=production
+FROM nginx:alpine
+COPY --from=build /joinme/dist/enjoyIt /usr/share/nginx/html

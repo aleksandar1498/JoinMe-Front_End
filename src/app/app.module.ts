@@ -27,6 +27,10 @@ import { JoinedEventsComponent } from './components/public/events/joined-events/
 import { InterstedEventsComponent } from './components/public/events/intersted-events/intersted-events.component';
 import { MyEventsComponent } from './components/public/events/my-events/my-events.component';
 import { ProfileComponent } from './components/public/user/profile/profile/profile.component';
+import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
+import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
+import { LocationManagerComponent } from './components/admin/location-manager/location-manager.component';
+import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
 
 
 
@@ -51,7 +55,11 @@ import { ProfileComponent } from './components/public/user/profile/profile/profi
     JoinedEventsComponent,
     InterstedEventsComponent,
     MyEventsComponent,
-    ProfileComponent
+    ProfileComponent,
+    RoleManagerComponent,
+    AccountModeratorComponent,
+    LocationManagerComponent,
+    EventModeratorComponent
   ],
   imports: [
     ReactiveFormsModule,
