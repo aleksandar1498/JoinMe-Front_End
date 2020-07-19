@@ -22,10 +22,11 @@
         <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="roles">
+    <ng-container matColumnDef="authorities">
         <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            {{row.roles}}
+            <span>{{row.authorities.join(',')}} 
+            </span>
         </mat-cell>
     </ng-container>
 
@@ -40,6 +41,6 @@
 
 
     <!-- Header and Row Declarations -->
-    <mat-header-row *matHeaderRowDef="['username','name','surname', 'email','roles','edit']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['username','name','surname', 'email','roles','edit']"></mat-row>
+    <mat-header-row *matHeaderRowDef="['username','name','surname', 'email','authorities','edit']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['username','name','surname', 'email','authorities','edit']"></mat-row>
 </mat-table>

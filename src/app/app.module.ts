@@ -31,6 +31,8 @@ import { RoleManagerComponent } from './components/admin/role-manager/role-manag
 import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
 import { LocationManagerComponent } from './components/admin/location-manager/location-manager.component';
 import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
+import { RoleManagerDialogComponent } from './components/dialogs/role-manager-dialog/role-manager-dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -59,11 +61,13 @@ import { EventModeratorComponent } from './components/admin/event-moderator/even
     RoleManagerComponent,
     AccountModeratorComponent,
     LocationManagerComponent,
-    EventModeratorComponent
+    EventModeratorComponent,
+    RoleManagerDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
+    MatDialogModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -74,6 +78,7 @@ import { EventModeratorComponent } from './components/admin/event-moderator/even
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthorization, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ]
+  ],
+  entryComponents : [RoleManagerDialogComponent]
 })
 export class AppModule { }

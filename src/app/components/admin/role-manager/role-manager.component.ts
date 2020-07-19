@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from 'src/app/models/enums/role-type';
-import { User } from 'src/app/models/user';
 import { UserWithRoles } from 'src/app/models/user-roles';
-import { RoleManagerDialog } from '../../dialogs/role-manager-dialog';
+import { RoleManagerDialogComponent } from '../../dialogs/role-manager-dialog/role-manager-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-role-manager',
@@ -11,24 +11,31 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./role-manager.component.css']
 })
 export class RoleManagerComponent implements OnInit {
-  roles: Role[];
+
   users: UserWithRoles[];
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.roles = Object.values(Role).map(key => Role[key]).filter(key => !isNaN(Number(Role[key])));
-    this.users = [
-      new UserWithRoles('alex123', 'alex', 'stefanov', 'alex@gmail.com', ['USER']),
-      new UserWithRoles('fani32', 'fani', 'ah', 'alex@gmail.com', ['USER']),
-      new UserWithRoles('kosi', 'konstantin', 'domanov', 'kosi@gmail.com', ['ORGANIZER']),
-    ];
+    this.userService.loadUsersWithRoles().subscribe(users => {
+
+      users.map(u => {
+        u.authorities = u.authorities.map(a => {
+          return a['authority'];
+        });
+        return u;
+      });
+      this.users = users;
+    });
   }
 
-  showDialog(event, user) {
+  showDialog(event, user: UserWithRoles) {
     console.log(user);
-    let dialogRef = this.dialog.open(RoleManagerDialog, {
+    const dialogRef = this.dialog.open(RoleManagerDialogComponent, {
       data: { user },
     });
+    /*dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });*/
   }
 
 }

@@ -5,12 +5,12 @@ import { urlBuilder } from '../common/urlBuilder';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { eventMapper } from '../common/mappers/object-mapper';
+import { UserWithRoles } from '../models/user-roles';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   joinedEvents: BehaviorSubject<Event[]>;
   currentJoinedEvents: Observable<Event[]>;
   interestedEvents: BehaviorSubject<Event[]>;
@@ -61,5 +61,16 @@ export class UserService {
       this.joinedEvents.next(res);
     });
   }
+
+  loadUsersWithRoles() {
+    const url = environment.resturl + '/users';
+    return this.http.get<UserWithRoles[]>(url);
+  }
+
+  editRoles(user: UserWithRoles): Observable<UserWithRoles> {
+    const url = environment.resturl + '/users/roles';
+    return this.http.put<UserWithRoles>(url, { user });
+  }
+
 
 }
