@@ -68,8 +68,9 @@ export class UserService {
   }
 
   editRoles(user: UserWithRoles): Observable<UserWithRoles> {
+    console.log(user);
     const url = environment.resturl + '/users/roles';
-    return this.http.put<UserWithRoles>(url, { user });
+    return this.http.put<UserWithRoles>(url, user);
   }
 
 

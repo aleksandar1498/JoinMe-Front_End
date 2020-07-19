@@ -17,6 +17,7 @@ export class RoleManagerDialogComponent {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private userService: UserService,
         private dialogRef: MatDialogRef<RoleManagerDialogComponent>) {
+        dialogRef.disableClose = true;
         this.authorities = Object.values(Role).map(key => {
             return Role[key];
         }).filter(auth => {
@@ -35,9 +36,5 @@ export class RoleManagerDialogComponent {
             this.dialogRef.close(this.data.res);
         });
 
-    }
-
-    showValue(event,value){
-        console.log(value);
     }
 }
