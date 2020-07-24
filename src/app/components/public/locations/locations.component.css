@@ -1,0 +1,20 @@
+mat-header-cell,mat-cell{
+    text-align: center;
+}
+mat-cell:last-child{
+    overflow: inherit;
+}
+mat-table{
+    width: 100%;
+}
+
+.dropdown>a{
+    cursor: pointer;
+    padding: 0.5em 1em;
+}
+.dropdown{
+    transition: linear .3s;
+}
+.dropdown:hover{
+    box-shadow: 2px 4px 5px 0px #0000003d;
+}

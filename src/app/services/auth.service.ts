@@ -41,10 +41,8 @@ export class AuthService {
             // TODO can retrieve user role
             const jwtToken = res.responseObject.KEY;
             const userAuth: UserAuth = Object.setPrototypeOf(res.responseObject, UserAuth.prototype);
-            console.log(userAuth);
             localStorage.setItem('auth', JSON.stringify(userAuth));
             this.currentUserSubject.next(userAuth);
-            console.log(this.jwt.getRoles());
             if (this.jwt.getRoles().includes('ADMIN')) {
               this.router.navigate(['/admin']);
             } else if(this.jwt.getRoles().includes('USER')){
