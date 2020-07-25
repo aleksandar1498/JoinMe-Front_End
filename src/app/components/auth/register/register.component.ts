@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/user-register';
 import { PasswordMatch } from 'src/app/common/validators/passwordMatcher';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-register',
@@ -13,34 +15,36 @@ import { PasswordMatch } from 'src/app/common/validators/passwordMatcher';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private errorService: ErrorService,
+    private router: Router,
+    private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      username: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      name: new FormControl('', [Validators.required]),
-      surname: new FormControl('', [Validators.required]),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl(''),
+      name: new FormControl(''),
+      surname: new FormControl(''),
+      password: new FormControl(''),
+      confirmPassword: new FormControl(''),
+      email: new FormControl(''),
       organizer: new FormControl(false)
-    }, {
-      validator: PasswordMatch('password', 'confirmPassword')
-    }
-    );
+    });
   }
   get f() { return this.registerForm.controls; }
 
   register() {
-
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
     const user: UserRegister = Object.setPrototypeOf(this.registerForm.value, UserRegister.prototype);
-    this.authService.register(user);
+    this.authService.register(user).subscribe(
+      res => {
+        this.router.navigateByUrl('/login');
+      },
+      (err: HttpErrorResponse) => {
+        this.errorService.renderServerErrors(this.registerForm, err);
+      });
   }
 
 }

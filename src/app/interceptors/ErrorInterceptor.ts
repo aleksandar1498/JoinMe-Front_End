@@ -4,7 +4,6 @@ import { AuthService } from '../services/auth.service';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorNotifierComponent } from '../components/common/notification/error/error-notifier/error-notifier.component';
 @Injectable({
     providedIn: 'root',
 })

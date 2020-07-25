@@ -62,10 +62,10 @@ export class EventsComponent implements OnInit {
   cancel(event: Event) {
     console.log(event);
     this.eventService.cancel(event).subscribe(res => {
-      if(res.responseCode === 'OK'){
+      if (res.responseCode === 'OK') {
         this.eventService.reloadEvents();
       }
-    })
+    });
   }
 
   renderEvents() {

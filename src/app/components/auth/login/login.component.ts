@@ -5,6 +5,9 @@ import { User, UserLogin } from '../../../models/user';
 import { Router } from '@angular/router';
 import { JwtValidationService } from 'src/app/auth/jwt-validation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserAuth } from 'src/app/models/user-auth';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +17,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   submitted = false;
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    username: new FormControl(''),
+    password: new FormControl(''),
   });
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private jwt: JwtValidationService, private errorService: ErrorService) {
 
   }
 
@@ -25,15 +28,25 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.invalid) {
-      this.submitted = true;
-      return;
-    }
     const user: UserLogin = Object.setPrototypeOf(this.loginForm.value, UserLogin.prototype);
-    this.authService.login(user);
+    this.authService.login(user).subscribe(
+      res => {
+        const userAuth: UserAuth = Object.setPrototypeOf(res, UserAuth.prototype);
+        localStorage.setItem('auth', JSON.stringify(userAuth));
+        this.authService.setCurrentUserSubject(userAuth);
+        if (this.jwt.getRoles().includes('ADMIN')) {
+          this.router.navigate(['/admin']);
+        } else if (this.jwt.getRoles().includes('USER')) {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/profile']);
+        }
+      },
+      (err: HttpErrorResponse) => {
+        this.errorService.renderServerErrors(this.loginForm, err);
+      });
   }
 
-  get f() { return this.loginForm.controls; }
 
 
 }
