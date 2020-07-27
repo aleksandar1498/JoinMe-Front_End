@@ -1,0 +1,40 @@
+.notification {
+    min-height: 3.5em;
+    border-radius: 10px;
+    z-index: 100;
+    position: absolute;
+    margin: auto;
+    top: 3em;
+    left: 0;
+    right: 0;
+    width: 50%;
+    min-width: 250px;
+    color: white;
+}
+
+.notification span {
+    padding: .5em .2em .5em 0em;
+}
+
+.notification h3, .notification p {
+    margin: .2em auto;
+}
+
+.notification p {
+    font-weight: 100;
+}
+
+.notification.success {
+    background-color: rgba(153, 205, 50, 0.75);
+}
+
+.notification.success:hover{
+    background-color: rgb(153, 205, 50);
+}
+.notification.error {
+    background-color: rgba(255, 0, 0, 0.75);
+}
+
+.notification.error:hover {
+    background-color: rgb(255, 0, 0);
+}

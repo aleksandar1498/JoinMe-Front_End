@@ -1,0 +1,12 @@
+<div *ngIf="isVisible" class="row justify-content-center notification" [ngClass]="{
+        'success':isSuccess === true,
+        'error':isSuccess === false
+        }" style="margin: 1em auto;">
+    <div class="col-3 col-md-2" style=" border-right: 2px solid white;"><span class="material-icons">
+            {{isSuccess?'check_circle_outline':'error_outline'}}
+        </span>
+    </div>
+    <div class="col-9 col-md-10 my-auto">
+        <p>{{message}}</p>
+    </div>
+</div>
