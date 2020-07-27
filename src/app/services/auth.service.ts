@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { UserAuth } from '../models/user-auth';
 import { UserRegister } from '../models/user-register'; 
 import { ErrorService } from './error.service';
+import { NotificationService } from './notification.service';
 
 
 
@@ -21,7 +22,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private errorService: ErrorService,
+    private notificationService: NotificationService,
   ) {
     this.currentUserSubject = new BehaviorSubject<UserAuth>(JSON.parse(localStorage.getItem('auth')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -47,6 +48,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('auth');
+    this.notificationService.showSuccess('Logged out');
     this.currentUserSubject.next(null);
     this.router.navigateByUrl('/login');
   }

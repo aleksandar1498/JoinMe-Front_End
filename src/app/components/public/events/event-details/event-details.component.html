@@ -18,8 +18,9 @@
                             </ng-container>
                         </h1>
 
-                        <p class="card-text">{{event.description}}</p>
-                        <p>{{event.startDate | date : 'fullDate'}}</p>
+                        <p class="card-text">Description : {{event.description}}</p>
+                        <p>Start Date : {{event.startDate | date : 'fullDate'}}</p>
+                        <p>Location : {{event.location.city}} {{event.location.address}}</p>
                     </div>
                 </div>
             </div>

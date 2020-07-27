@@ -7,6 +7,8 @@ import { Location } from 'src/app/models/location';
 import { LocationCategory } from 'src/app/models/enums/location-category';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorNotifierComponent } from 'src/app/components/common/notification/error/error-notifier/error-notifier.component';
+import { ErrorService } from 'src/app/services/error.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-location-update',
@@ -21,14 +23,19 @@ export class LocationUpdateComponent implements OnInit {
     locationCategory: new FormControl(null),
   });
   returnUrl: string;
-  constructor(private _locationService: LocationService, private _router: Router, private current: ActivatedRoute, private _snackBar: MatSnackBar) { }
+  constructor(
+    private locationService: LocationService,
+    private router: Router,
+    private current: ActivatedRoute,
+    private errorService: ErrorService,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.current.params.subscribe(res => {
-      this._locationService.findById(res.id).subscribe(data => {
+      this.locationService.findById(res.id).subscribe(data => {
         this.updateLocationForm.setValue(data);
       });
-    })
+    });
     this.current.queryParams.subscribe(res => {
       this.returnUrl = res.returnUrl ? res.returnUrl : '/locations';
     });
@@ -36,25 +43,16 @@ export class LocationUpdateComponent implements OnInit {
 
   update() {
     const updatedLocation: Location = Object.setPrototypeOf(this.updateLocationForm.value, Location.prototype);
-    this._locationService.update(updatedLocation).subscribe(data => {
+    this.locationService.update(updatedLocation).subscribe(data => {
+      this.notificationService.showSuccess('Location Edited');
       if (typeof this.returnUrl !== 'undefined') {
-        this._router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl(this.returnUrl);
       } else {
-        this._router.navigateByUrl('/locations');
+        this.router.navigateByUrl('/locations');
       }
     },
       (err: HttpErrorResponse) => {
-        for (const prop of Object.keys(err.error)) {
-          const formControl = this.updateLocationForm.get(prop);
-          if (formControl) {
-            formControl.setErrors({
-              serverError: err.error[prop]
-            });
-          } else {
-            this._snackBar.openFromComponent(ErrorNotifierComponent, { data: { error: err.error.error } });
-            break;
-          }
-        }
+        this.errorService.renderServerErrors(this.updateLocationForm, err);
       });
   }
 }

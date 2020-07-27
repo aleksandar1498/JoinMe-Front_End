@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserAuth } from 'src/app/models/user-auth';
 import { UserService } from 'src/app/services/user.service';
 import { Event } from 'src/app/models/event';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-event-details',
@@ -17,7 +18,9 @@ export class EventDetailsComponent implements OnInit {
   constructor(
     private eventService: EventsService,
     private route: ActivatedRoute,
+    private router: Router,
     private authService: AuthService,
+    private notificationService: NotificationService,
     private userService: UserService) { }
 
   ngOnInit(): void {
@@ -61,15 +64,14 @@ export class EventDetailsComponent implements OnInit {
   }
 
   cancel(event: Event) {
-    this.eventService.cancel(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
+    const c = confirm('This operation cannot be undone');
+    if (c) {
+      this.eventService.cancel(event).subscribe(() => {
         this.renderEvent();
-      }
-    });
-  }
+        this.notificationService.showSuccess('Cancelled');
+      });
+    }
 
-  edit(event: Event) {
-    // once edit, notify users for that 
   }
 
   renderEvent() {

@@ -2,7 +2,7 @@
     min-height: 3.5em;
     border-radius: 10px;
     z-index: 100;
-    position: absolute;
+    position: fixed;
     margin: auto;
     top: 3em;
     left: 0;

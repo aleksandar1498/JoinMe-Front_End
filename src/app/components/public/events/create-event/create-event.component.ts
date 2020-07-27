@@ -8,6 +8,8 @@ import { catchError } from 'rxjs/operators';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 import { EventCategory } from 'src/app/models/enums/event-category';
+import { ErrorService } from 'src/app/services/error.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-create-event',
@@ -25,7 +27,12 @@ export class CreateEventComponent implements OnInit {
     endDate: new FormControl(''),
   });
   get eventCategories() { return Object.keys(EventCategory).slice(Object.keys(EventCategory).length / 2); }
-  constructor(private eventService: EventsService, private router: Router, private locationService: LocationService) {
+  constructor(
+    private eventService: EventsService,
+    private router: Router,
+    private locationService: LocationService,
+    private errorService: ErrorService,
+    private notificationService: NotificationService) {
 
   }
 
@@ -37,19 +44,12 @@ export class CreateEventComponent implements OnInit {
     const event: Event = Object.setPrototypeOf(this.createEventForm.value, Event.prototype);
     this.eventService.create(event).subscribe(
       data => {
-        this.router.navigateByUrl("/events")
+        this.notificationService.showSuccess('Event created successfully');
+        this.router.navigateByUrl('/events');
       },
       (err: HttpErrorResponse) => {
         const validationErrors = err.error;
-
-        Object.keys(validationErrors).forEach(prop => {
-          const formControl = this.createEventForm.get(prop);
-          if (formControl) {
-            formControl.setErrors({
-              serverError: validationErrors[prop]
-            });
-          }
-        });
+        this.errorService.renderServerErrors(this.createEventForm, err);
       });
   }
 

@@ -4,6 +4,7 @@ import { LocationCategory } from 'src/app/models/enums/location-category';
 import { Location } from 'src/app/models/location';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-locations',
@@ -13,7 +14,10 @@ import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 export class LocationsComponent implements OnInit {
   locations: Location[];
 
-  constructor(private locationService: LocationService, private router: Router, private current: ActivatedRoute) {
+  constructor(
+    private locationService: LocationService,
+    private notificationService: NotificationService,
+    private router: Router) {
     this.renderLocations = this.renderLocations.bind(this);
   }
 
@@ -34,9 +38,9 @@ export class LocationsComponent implements OnInit {
   }
   remove(event: any, locationId: string) {
     event.preventDefault();
-    if (confirm('Are you sure you want to delete the location with ID ' + locationId + ' ?') === true) {
-      this.locationService.remove(locationId).subscribe(data => {
-        console.log(data);
+    if (confirm('Are you sure you want to delete the location with ID ' + locationId + '? All the related events will be cancelled.') === true) {
+      this.locationService.remove(locationId).subscribe(() => {
+        this.notificationService.showSuccess('Location deleted');
         this.router.navigateByUrl('/admin/locations');
       },
         (err: HttpErrorResponse) => {

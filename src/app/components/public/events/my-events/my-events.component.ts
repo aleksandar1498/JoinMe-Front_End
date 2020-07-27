@@ -69,6 +69,7 @@ export class MyEventsComponent implements OnInit {
   renderEvents() {
     this.eventService.reloadEvents();
     this.eventService.getEventsForUser().subscribe(res => {
+      console.log(res);
       this.events = res.filter(e => !e.cancelled);
     });
   }

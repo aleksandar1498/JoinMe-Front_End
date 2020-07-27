@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserAuth } from 'src/app/models/user-auth';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
-  constructor(private authService: AuthService, private router: Router, private jwt: JwtValidationService, private errorService: ErrorService) {
+  constructor(private authService: AuthService, private router: Router, private jwt: JwtValidationService, private errorService: ErrorService, private notificationService: NotificationService) {
 
   }
 
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
       res => {
         const userAuth: UserAuth = Object.setPrototypeOf(res, UserAuth.prototype);
         localStorage.setItem('auth', JSON.stringify(userAuth));
+        this.notificationService.showSuccess("Logged in successfully");
         this.authService.setCurrentUserSubject(userAuth);
         if (this.jwt.getRoles().includes('ADMIN')) {
           this.router.navigate(['/admin']);

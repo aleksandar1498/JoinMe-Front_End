@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorNotifierComponent } from 'src/app/components/common/notification/error/error-notifier/error-notifier.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-location-create',
@@ -20,7 +21,7 @@ export class LocationCreateComponent implements OnInit {
     address: new FormControl(''),
     locationCategory: new FormControl(null)
   });
-  constructor(private _locationService: LocationService, private _router: Router, private errorService: ErrorService, private _snackBar: MatSnackBar) { }
+  constructor(private _locationService: LocationService, private _router: Router, private errorService: ErrorService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.categories = Object.values(LocationCategory).map(key => {
@@ -33,7 +34,8 @@ export class LocationCreateComponent implements OnInit {
   create() {
     const newLocation: Location = Object.setPrototypeOf(this.createLocationForm.value, Location.prototype);
 
-    this._locationService.create(newLocation).subscribe(data => {
+    this._locationService.create(newLocation).subscribe(() => {
+      this.notificationService.showSuccess('Location created');
       this._router.navigateByUrl('/admin/locations');
     },
       (err: HttpErrorResponse) => {

@@ -35,6 +35,7 @@ import { RoleManagerDialogComponent } from './components/dialogs/role-manager-di
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LocationCreateComponent } from './components/public/locations/create/location-create/location-create.component';
 import { LocationUpdateComponent } from './components/public/locations/update/location-update/location-update.component';
+import { NotificationComponent } from './components/common/notification/notification/notification/notification.component';
 
 
 
@@ -66,7 +67,8 @@ import { LocationUpdateComponent } from './components/public/locations/update/lo
     EventModeratorComponent,
     RoleManagerDialogComponent,
     LocationCreateComponent,
-    LocationUpdateComponent
+    LocationUpdateComponent,
+    NotificationComponent
   ],
   imports: [
     ReactiveFormsModule,

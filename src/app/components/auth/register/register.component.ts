@@ -6,6 +6,7 @@ import { UserRegister } from 'src/app/models/user-register';
 import { PasswordMatch } from 'src/app/common/validators/passwordMatcher';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private errorService: ErrorService,
+    private notificationService: NotificationService,
     private router: Router,
     private formBuilder: FormBuilder) {
 
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
     const user: UserRegister = Object.setPrototypeOf(this.registerForm.value, UserRegister.prototype);
     this.authService.register(user).subscribe(
       res => {
+        this.notificationService.showSuccess('Registered successfully');
         this.router.navigateByUrl('/login');
       },
       (err: HttpErrorResponse) => {

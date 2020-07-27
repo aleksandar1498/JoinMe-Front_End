@@ -3,13 +3,14 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorNotifierComponent } from '../components/common/notification/error/error-notifier/error-notifier.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private notificationService: NotificationService) { }
 
   renderErrors(form: FormGroup, errors: any) {
     console.log(form, errors);
@@ -20,7 +21,7 @@ export class ErrorService {
           serverError: errors.error[prop]
         });
       } else {
-        this.snackBar.openFromComponent(ErrorNotifierComponent, { data: { error: errors.error } });
+        this.notificationService.showError(errors.error);
         break;
       }
     }
@@ -35,8 +36,7 @@ export class ErrorService {
           serverError: errors.error[prop]
         });
       } else {
-        this.snackBar.openFromComponent(ErrorNotifierComponent,
-          { data: { error: errors.error[prop] ? errors.error[prop] : 'Something went wrong, contact the administator'  } });
+        this.notificationService.showError(errors.error[prop] ? errors.error[prop] : 'Something went wrong, contact the administator');
         break;
       }
     }
