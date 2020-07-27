@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UserLogin } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { UserAuth } from '../models/user-auth';
-import { UserRegister } from '../models/user-register'; 
-import { ErrorService } from './error.service';
+import { UserRegister } from '../models/user-register';
 import { NotificationService } from './notification.service';
 
 

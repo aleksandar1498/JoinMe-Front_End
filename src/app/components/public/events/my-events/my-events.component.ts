@@ -4,6 +4,7 @@ import { Event } from 'src/app/models/event';
 import { EventsService } from 'src/app/services/events.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-my-events',
@@ -13,7 +14,11 @@ import { UserService } from 'src/app/services/user.service';
 export class MyEventsComponent implements OnInit {
   events: Event[];
   user: UserAuth;
-  constructor(private eventService: EventsService, private authService: AuthService, private userService: UserService) {
+  constructor(
+    private eventService: EventsService,
+    private authService: AuthService,
+    private userService: UserService,
+    private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -25,51 +30,41 @@ export class MyEventsComponent implements OnInit {
   }
 
   join(event: Event) {
-    this.userService.joinEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.eventService.reloadEvents();
-      }
+    this.userService.joinEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   disjoin(event: Event) {
-    this.userService.disjoinEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.eventService.reloadEvents();
-      }
+    this.userService.disjoinEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   markAsInterest(event: Event) {
-    this.userService.interestEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.eventService.reloadEvents();
-      }
+    this.userService.interestEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   removeInterest(event: Event) {
-    this.userService.removeInterest(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        console.log(res);
-        this.eventService.reloadEvents();
-      }
+    this.userService.removeInterest(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
-
   cancel(event: Event) {
-    console.log(event);
-    this.eventService.cancel(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.eventService.reloadEvents();
-      }
-    })
+    const c = confirm('This operation cannot be undone');
+    if (c) {
+      this.eventService.cancel(event).subscribe(() => {
+        this.renderEvents();
+        this.notificationService.showSuccess('Cancelled');
+      });
+    }
   }
 
   renderEvents() {
     this.eventService.reloadEvents();
     this.eventService.getEventsForUser().subscribe(res => {
-      console.log(res);
       this.events = res.filter(e => !e.cancelled);
     });
   }

@@ -32,34 +32,26 @@ export class EventDetailsComponent implements OnInit {
   }
 
   join(event: Event) {
-    this.userService.joinEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.renderEvent();
-      }
+    this.userService.joinEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   disjoin(event: Event) {
-    this.userService.disjoinEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.renderEvent();
-      }
+    this.userService.disjoinEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   markAsInterest(event: Event) {
-    this.userService.interestEvent(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.renderEvent();
-      }
+    this.userService.interestEvent(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
   removeInterest(event: Event) {
-    this.userService.removeInterest(event).subscribe(res => {
-      if (res.responseCode === 'OK') {
-        this.renderEvent();
-      }
+    this.userService.removeInterest(event).subscribe(() => {
+      this.userService.reloadEvents();
     });
   }
 
@@ -71,7 +63,6 @@ export class EventDetailsComponent implements OnInit {
         this.notificationService.showSuccess('Cancelled');
       });
     }
-
   }
 
   renderEvent() {
