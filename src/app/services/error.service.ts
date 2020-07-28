@@ -12,20 +12,8 @@ export class ErrorService {
 
   constructor(private notificationService: NotificationService) { }
 
-  renderErrors(form: FormGroup, errors: any) {
-    console.log(form, errors);
-    for (const prop of Object.keys(errors.error)) {
-      const formControl = form.get(prop);
-      if (formControl) {
-        formControl.setErrors({
-          serverError: errors.error[prop]
-        });
-      } else {
-        this.notificationService.showError(errors.error);
-        break;
-      }
-    }
-
+  renderErrors(errors: any) {
+    this.notificationService.showError(errors.error.error);
   }
 
   renderServerErrors(form: FormGroup, errors: any) {
