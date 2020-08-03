@@ -1,0 +1,17 @@
+<div class="notification-dashboard">
+    <h1 *ngIf="feeds.length > 0" class="text-center text-white">Feeds</h1>
+    <div *ngFor="let feed of feeds" class="row justify-content-center notification info text-white"
+        style="margin: 1em auto;">
+        <div class="col-3 col-md-2" style=" border-right: 2px solid white;"><span class="material-icons">
+                info_outline
+            </span>
+        </div>
+        <div class="col-8 col-md-9 my-auto">
+            <p>{{feed.message}}</p>
+        </div>
+        <div class="col-1 col-md-1 "><span class="material-icons view-feed" (click)="view(feed.id)">
+                close
+            </span>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ export class Event {
     endDate: Date;
     joinedUsers: string[];
     cancelled: boolean;
+    banned: boolean;
     owner: User;
     interestedUsers: string[];
 
@@ -22,6 +23,7 @@ export class Event {
         category: EventCategory,
         description: string,
         cancelled: boolean,
+        banned: boolean,
         startDate: Date,
         endDate: Date, owner: User = null, joinedUsers: string[], interestedUsers: string[]) {
         this.id = id;
@@ -32,6 +34,7 @@ export class Event {
         this.endDate = endDate;
         this.description = description;
         this.cancelled = cancelled;
+        this.banned = banned;
         this.owner = owner;
         this.joinedUsers = joinedUsers;
         this.interestedUsers = interestedUsers;

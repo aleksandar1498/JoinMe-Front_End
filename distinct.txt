@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT id,YEAR(start_date)) from events WHERE owner_id = '263b21c2-9910-4907-beae-60079b7e4d3f' group by YEAR(start_date);

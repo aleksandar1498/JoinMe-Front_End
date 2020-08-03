@@ -1,5 +1,9 @@
-<h1>All Events</h1>
+        
+<button class="btn btn-success m-2 float-right"
+                                [routerLink]="['/events/create']">New Event</button>
+                                <h1 class="text-center">Events</h1>
 <div class="row justify-content-center">
+    
     <div *ngFor="let event of events" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
         <div class="card h-100">
             <h3 class="card-header"><a [routerLink]="['/events',event.id]">{{event.title}}</a>
@@ -23,9 +27,9 @@
                 <p>{{event.startDate | date : 'fullDate'}}</p>
                 <div class="row">
                     <ng-container *ngIf="event.owner.username !=  user.username;else ownerBtns">
-                        <div *ngIf="event.joinedUsers.indexOf(user.username) < 0" class="col-6 w-100"><button 
+                        <div *ngIf="event.joinedUsers.indexOf(user.username) < 0" class="col-6 w-100"><button
                                 class="btn btn-success w-100" (click)="join(event)">Join Me</button></div>
-                        <div *ngIf="event.joinedUsers.indexOf(user.username) >= 0" class="col-6 w-100"><button 
+                        <div *ngIf="event.joinedUsers.indexOf(user.username) >= 0" class="col-6 w-100"><button
                                 class="btn btn-danger w-100" (click)="disjoin(event)">Disjoin</button></div>
 
 
@@ -44,55 +48,3 @@
         </div>
     </div>
 </div>
-<!-- 
-<h1>Events Created By User</h1>
-<div class="row justify-content-center">
-    
-    <div *ngFor="let event of myEvents" class="col-sm-12 col-sm-4 col-md-6 col-lg-5 m-2">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-3 m-2">
-                    <img style="height: 100%;width: 100%;"
-                        src="https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2017/12/22223742/Events-1200x630.jpg"
-                        class="card-img-top" alt="Event">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-
-                        <h3 class="card-title">{{event.title}}</h3>
-                        <p class="card-text">{{event.description}}</p>
-                        <button class="btn btn-primary" (click)="join(event)">Join Event</button>
-                        <button class="btn btn-primary ml-2">Add To Favorite</button>
-                        <button *ngIf="event.owner.username ==  user.username">Hello</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<h1>Events Of Other People</h1>
-<div class="row justify-content-center">
-    
-    <div *ngFor="let event of otherEvents" class="col-sm-12 col-sm-4 col-md-6 col-lg-5 m-2">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-3 m-2">
-                    <img style="height: 100%;width: 100%;"
-                        src="https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2017/12/22223742/Events-1200x630.jpg"
-                        class="card-img-top" alt="Event">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-
-                        <h3 class="card-title">{{event.title}}</h3>
-                        <p class="card-text">{{event.description}}</p>
-                        <button class="btn btn-primary" (click)="join(event)">Join Event</button>
-                        <button class="btn btn-primary ml-2">Add To Favorite</button>
-                        <button *ngIf="event.owner.username ==  user.username">Hello</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->

@@ -3,6 +3,9 @@
     font-size: 15px;
     color: #96999a;
 }
+.nav-link{
+    cursor: pointer;
+}
 .navbar-toggler{
     position: relative;
     top: -.3em;

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from  './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -29,13 +29,13 @@ import { MyEventsComponent } from './components/public/events/my-events/my-event
 import { ProfileComponent } from './components/public/user/profile/profile/profile.component';
 import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
 import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
-import { LocationManagerComponent } from './components/admin/location-manager/location-manager.component';
 import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
 import { RoleManagerDialogComponent } from './components/dialogs/role-manager-dialog/role-manager-dialog';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LocationCreateComponent } from './components/public/locations/create/location-create/location-create.component';
 import { LocationUpdateComponent } from './components/public/locations/update/location-update/location-update.component';
 import { NotificationComponent } from './components/common/notification/notification/notification/notification.component';
+import { FeedsComponent } from './components/common/feeds/feeds.component';
 
 
 
@@ -63,12 +63,12 @@ import { NotificationComponent } from './components/common/notification/notifica
     ProfileComponent,
     RoleManagerComponent,
     AccountModeratorComponent,
-    LocationManagerComponent,
     EventModeratorComponent,
     RoleManagerDialogComponent,
     LocationCreateComponent,
     LocationUpdateComponent,
-    NotificationComponent
+    NotificationComponent,
+    FeedsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -78,13 +78,13 @@ import { NotificationComponent } from './components/common/notification/notifica
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule
-    
+
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthorization, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  entryComponents : [RoleManagerDialogComponent]
+  entryComponents: [RoleManagerDialogComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtValidationService } from 'src/app/auth/jwt-validation.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  roles: string[];
+  constructor(private jwtService: JwtValidationService) { }
 
   ngOnInit() {
+    this.roles = this.jwtService.getRoles();
   }
 
 }

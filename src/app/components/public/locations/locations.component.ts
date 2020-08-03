@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import { JwtValidationService } from 'src/app/auth/jwt-validation.service';
 
 @Component({
   selector: 'app-locations',
@@ -13,20 +14,23 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class LocationsComponent implements OnInit {
   locations: Location[];
-
+  roles: string[];
   constructor(
     private locationService: LocationService,
     private notificationService: NotificationService,
+    private jwtService: JwtValidationService,
     private router: Router) {
     this.renderLocations = this.renderLocations.bind(this);
   }
 
 
   ngOnInit(): void {
+    this.roles = this.jwtService.getRoles();
     this.renderLocations();
   }
 
   renderLocations() {
+    console.log("Called");
     this.locationService.findAllLocations().subscribe((data: Location[]) => {
       this.locations = data;
     });
@@ -41,7 +45,7 @@ export class LocationsComponent implements OnInit {
     if (confirm('Are you sure you want to delete the location with ID ' + locationId + '? All the related events will be cancelled.') === true) {
       this.locationService.remove(locationId).subscribe(() => {
         this.notificationService.showSuccess('Location deleted');
-        this.router.navigateByUrl('/admin/locations');
+        this.renderLocations();
       },
         (err: HttpErrorResponse) => {
           console.log(err);

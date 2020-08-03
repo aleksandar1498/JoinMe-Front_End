@@ -36,20 +36,13 @@ export class LocationUpdateComponent implements OnInit {
         this.updateLocationForm.setValue(data);
       });
     });
-    this.current.queryParams.subscribe(res => {
-      this.returnUrl = res.returnUrl ? res.returnUrl : '/locations';
-    });
   }
 
   update() {
     const updatedLocation: Location = Object.setPrototypeOf(this.updateLocationForm.value, Location.prototype);
     this.locationService.update(updatedLocation).subscribe(data => {
       this.notificationService.showSuccess('Location Edited');
-      if (typeof this.returnUrl !== 'undefined') {
-        this.router.navigateByUrl(this.returnUrl);
-      } else {
-        this.router.navigateByUrl('/locations');
-      }
+      this.router.navigateByUrl('/locations');
     },
       (err: HttpErrorResponse) => {
         this.errorService.renderServerErrors(this.updateLocationForm, err);

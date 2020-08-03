@@ -1,18 +1,24 @@
 class User {
+    id: string;
     username: string;
     name: string;
     surname: string;
     email: string;
+    banned: boolean;
 
     constructor(
+        id?: string,
         username?: string,
         name?: string,
         surname?: string,
-        email?: string) {
-            this.username = username;
-            this.name = name;
-            this.surname = surname;
-            this.email = email;
+        email?: string,
+        banned?: boolean) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.banned = banned;
     }
 
 }

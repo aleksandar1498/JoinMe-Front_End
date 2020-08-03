@@ -1,0 +1,52 @@
+.notification-dashboard{
+    width: 100%;
+    margin-top: 0em;
+    background-color: #9cd7ff;
+}
+.notification {
+    min-height: 3.5em;
+    background-color: #00c9ff;
+    z-index: 100;
+    margin: 0 auto;
+}
+.notification h1{
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.notification span {
+    padding: .5em .2em .5em 0em;
+}
+
+.notification h3, .notification p {
+    margin: .2em auto;
+}
+
+.notification p {
+    font-weight: 100;
+}
+
+.notification.success {
+    background-color: rgba(153, 205, 50, 0.75);
+}
+
+.notification.success:hover{
+    background-color: rgb(153, 205, 50);
+}
+.notification.error {
+    background-color: rgba(255, 0, 0, 0.75);
+}
+
+.notification.error:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.view-feed{
+    color:red;
+    transition: .2s linear;
+    font-weight: 900;
+    cursor: pointer;
+}
+.view-feed:hover{
+    color:white;
+}

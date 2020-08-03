@@ -36,7 +36,7 @@ export class LocationCreateComponent implements OnInit {
 
     this._locationService.create(newLocation).subscribe(() => {
       this.notificationService.showSuccess('Location created');
-      this._router.navigateByUrl('/admin/locations');
+      this._router.navigateByUrl('/locations');
     },
       (err: HttpErrorResponse) => {
         this.errorService.renderServerErrors(this.createLocationForm, err);

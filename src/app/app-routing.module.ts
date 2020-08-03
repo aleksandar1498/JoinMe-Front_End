@@ -14,9 +14,10 @@ import { EditEventComponent } from './components/public/events/edit-event/edit-e
 import { IndexComponent } from './components/index/index.component';
 import { ProfileComponent } from './components/public/user/profile/profile/profile.component';
 import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
-import { LocationManagerComponent } from './components/admin/location-manager/location-manager.component';
 import { LocationCreateComponent } from './components/public/locations/create/location-create/location-create.component';
 import { LocationUpdateComponent } from './components/public/locations/update/location-update/location-update.component';
+import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
+import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
 
 
 const routes: Routes = [
@@ -28,13 +29,15 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   {
-    path: 'create', component: CreateEventComponent, canActivate: [RoleAuthGuardService], data: {
+    path: 'events/create', component: CreateEventComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['USER', 'ORGANIZER']
     }
   },
   {
     path: 'events',
-    component: EventsComponent,
+    component: EventsComponent, canActivate: [RoleAuthGuardService], data: {
+      expectedRoles: ['USER']
+    }
   },
   {
     path: 'events/:id',
@@ -44,7 +47,16 @@ const routes: Routes = [
     path: 'events/edit/:id',
     component: EditEventComponent
   },
-  { path: 'locations', component: LocationsComponent },
+  {
+    path: 'locations', component: LocationsComponent, canActivate: [RoleAuthGuardService], data: {
+      expectedRoles: ['ADMIN', 'ORGANIZER']
+    }
+  },
+  {
+    path: 'locations/new', component: LocationCreateComponent, canActivate: [RoleAuthGuardService], data: {
+      expectedRoles: ['ADMIN', 'ORGANIZER']
+    }
+  },
   {
     path: 'locations/edit/:id', component: LocationUpdateComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['ADMIN', 'ORGANIZER']
@@ -62,15 +74,17 @@ const routes: Routes = [
     }
   },
   {
-    path: 'admin/locations', component: LocationManagerComponent, canActivate: [RoleAuthGuardService], data: {
+    path: 'admin/accounts', component: AccountModeratorComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['ADMIN']
     }
   },
   {
-    path: 'admin/locations/new', component: LocationCreateComponent, canActivate: [RoleAuthGuardService], data: {
+    path: 'admin/events', component: EventModeratorComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['ADMIN']
     }
   },
+
+
   {
     path: 'profile', component: ProfileComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['USER', 'ORGANIZER']

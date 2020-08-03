@@ -2,7 +2,7 @@ import { Event } from 'src/app/models/event';
 
 const eventMapper = (res: Event[]) => {
     return res.filter(e => {
-        return !e.cancelled;
+        return !e.cancelled && !e.banned;
     }).map(ev => {
         ev.joinedUsers = ev.joinedUsers.map(u => {
             return u['user']['username'];
@@ -12,6 +12,6 @@ const eventMapper = (res: Event[]) => {
         });
         return ev;
     });
-}
+};
 
 export { eventMapper };

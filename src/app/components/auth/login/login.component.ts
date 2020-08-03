@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
         this.authService.setCurrentUserSubject(userAuth);
         if (this.jwt.getRoles().includes('ADMIN')) {
           this.router.navigate(['/admin']);
-        } else if (this.jwt.getRoles().includes('USER')) {
-          this.router.navigate(['/home']);
-        } else {
+        } else if (this.jwt.getRoles().includes('ORGANIZER')) {
           this.router.navigate(['/profile']);
+        } else {
+          this.router.navigate(['/home']);
         }
       },
       (err: HttpErrorResponse) => {

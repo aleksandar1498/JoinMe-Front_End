@@ -65,7 +65,7 @@ export class MyEventsComponent implements OnInit {
   renderEvents() {
     this.eventService.reloadEvents();
     this.eventService.getEventsForUser().subscribe(res => {
-      this.events = res.filter(e => !e.cancelled);
+      this.events = res.filter(e => !e.cancelled && !e.banned);
     });
   }
 }

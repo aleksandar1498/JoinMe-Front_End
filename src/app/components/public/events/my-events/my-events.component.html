@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Created by me</h1>
+    <h1>My Events</h1>
     <div class="row justify-content-center">
         <div *ngFor="let event of events" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card h-100">
@@ -45,7 +45,7 @@
         <div *ngIf="events?.length === 0">
             <i>
                 <h1>You do not have created events, create an event by a simple click <i><a
-                            [routerLink]="['/create']">Create Event</a></i></h1>
+                            [routerLink]="['/events/create']">Create Event</a></i></h1>
             </i>
         </div>
 

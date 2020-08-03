@@ -1,5 +1,5 @@
 <h1>Create Event</h1>
-<div class="col-md-4 offset-md-4 mt-8">
+<div class="col-md-4 offset-md-4 mt-2">
     <form [formGroup]="createEventForm">
         <mat-error *ngIf="createEventForm.get('title').errors?.serverError">
             {{ createEventForm.get('title').errors?.serverError }}
