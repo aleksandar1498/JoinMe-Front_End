@@ -36,6 +36,8 @@ import { LocationCreateComponent } from './components/public/locations/create/lo
 import { LocationUpdateComponent } from './components/public/locations/update/location-update/location-update.component';
 import { NotificationComponent } from './components/common/notification/notification/notification/notification.component';
 import { FeedsComponent } from './components/common/feeds/feeds.component';
+import { OrganizerComponent } from './components/organizer/organizer.component';
+import { SafePipe } from './common/safe.pipe';
 
 
 
@@ -68,7 +70,9 @@ import { FeedsComponent } from './components/common/feeds/feeds.component';
     LocationCreateComponent,
     LocationUpdateComponent,
     NotificationComponent,
-    FeedsComponent
+    FeedsComponent,
+    OrganizerComponent,
+    SafePipe
   ],
   imports: [
     ReactiveFormsModule,

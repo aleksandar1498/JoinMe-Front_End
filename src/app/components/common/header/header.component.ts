@@ -31,7 +31,9 @@ export class HeaderComponent implements OnInit {
       this.roles = this.jwt.getRoles();
       if (this.roles.findIndex(x => x === 'ADMIN') >= 0) {
         this.redirectHome = 'admin';
-      } else {
+      } else if(this.roles.findIndex(x => x === 'ORGANIZER') >= 0){
+        this.redirectHome = 'organizer';
+      }else{
         this.redirectHome = 'home';
       }
     } else {

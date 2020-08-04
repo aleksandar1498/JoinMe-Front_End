@@ -18,6 +18,7 @@ import { LocationCreateComponent } from './components/public/locations/create/lo
 import { LocationUpdateComponent } from './components/public/locations/update/location-update/location-update.component';
 import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
 import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
+import { OrganizerComponent } from './components/organizer/organizer.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['USER', 'ADMIN']
+    }
+  },
+  {
+    path: 'organizer', component: OrganizerComponent, canActivate: [RoleAuthGuardService], data: {
+      expectedRoles: ['ORGANIZER']
     }
   },
   { path: 'login', component: LoginComponent },
