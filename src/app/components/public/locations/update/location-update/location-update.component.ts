@@ -19,7 +19,7 @@ export class LocationUpdateComponent implements OnInit {
   updateLocationForm = new FormGroup({
     id: new FormControl(''),
     city: new FormControl(''),
-    address: new FormControl(''),
+    name: new FormControl(''),
     locationCategory: new FormControl(null),
   });
   returnUrl: string;

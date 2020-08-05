@@ -72,7 +72,7 @@ export class EventsComponent implements OnInit {
   renderEvents() {
     this.eventService.reloadEvents();
     this.eventService.getAllEvents().subscribe(res => {
-      this.events = res;
+      this.events = res.filter(ev => ev.owner.username !== this.authService.currentUserValue.username);
     });
   }
 }

@@ -38,6 +38,7 @@ import { NotificationComponent } from './components/common/notification/notifica
 import { FeedsComponent } from './components/common/feeds/feeds.component';
 import { OrganizerComponent } from './components/organizer/organizer.component';
 import { SafePipe } from './common/safe.pipe';
+import { SplineChartComponent } from './components/spline-chart/spline-chart.component';
 
 
 
@@ -72,7 +73,8 @@ import { SafePipe } from './common/safe.pipe';
     NotificationComponent,
     FeedsComponent,
     OrganizerComponent,
-    SafePipe
+    SafePipe,
+    SplineChartComponent
   ],
   imports: [
     ReactiveFormsModule,

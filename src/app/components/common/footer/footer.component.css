@@ -1,7 +1,11 @@
 .footer-bottom{
     margin: 1em auto;
+    height: 4%;
     text-align: center;
     border-top: 2px solid #7e8a9761;
+}
+footer{
+    height: 2em;
 }
 .container{
     max-width: 100%;

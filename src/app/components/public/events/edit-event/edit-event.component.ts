@@ -48,14 +48,16 @@ export class EditEventComponent implements OnInit {
     const eventId = this.route.snapshot.params.id;
     this.eventService.getEventById(eventId).subscribe(res => {
       this.location = Object.setPrototypeOf(res.location, Location.prototype);
-      this.editEventForm.setValue(res);
+      try {
+        this.editEventForm.setValue(res);
+      } catch (error) {
+      }
     });
   }
 
   edit() {
     this.editEventForm.get('location').setValue(this.location);
     const event: Event = Object.setPrototypeOf(this.editEventForm.value, Event.prototype);
-    console.log(event);
     this.eventService.edit(event).subscribe(
       () => {
         this.notificationService.showSuccess('Event edited successfully');

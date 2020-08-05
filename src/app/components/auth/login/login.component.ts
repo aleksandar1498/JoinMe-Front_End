@@ -39,13 +39,14 @@ export class LoginComponent implements OnInit {
         if (this.jwt.getRoles().includes('ADMIN')) {
           this.router.navigate(['/admin']);
         } else if (this.jwt.getRoles().includes('ORGANIZER')) {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/organizer']);
         } else {
           this.router.navigate(['/home']);
         }
       },
       (err: HttpErrorResponse) => {
         this.errorService.renderServerErrors(this.loginForm, err);
+        this.loginForm.reset();
       });
   }
 

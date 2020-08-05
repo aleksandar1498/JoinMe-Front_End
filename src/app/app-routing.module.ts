@@ -19,10 +19,12 @@ import { LocationUpdateComponent } from './components/public/locations/update/lo
 import { AccountModeratorComponent } from './components/admin/account-moderator/account-moderator.component';
 import { EventModeratorComponent } from './components/admin/event-moderator/event-moderator.component';
 import { OrganizerComponent } from './components/organizer/organizer.component';
+import { AboutComponent } from './components/public/about/about.component';
 
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: 'home', component: HomeComponent, canActivate: [RoleAuthGuardService], data: {
       expectedRoles: ['USER', 'ADMIN']

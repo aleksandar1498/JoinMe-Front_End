@@ -33,25 +33,25 @@ export class EventDetailsComponent implements OnInit {
 
   join(event: Event) {
     this.userService.joinEvent(event).subscribe(() => {
-      this.userService.reloadEvents();
+      this.renderEvent();;
     });
   }
 
   disjoin(event: Event) {
     this.userService.disjoinEvent(event).subscribe(() => {
-      this.userService.reloadEvents();
+      this.renderEvent();
     });
   }
 
   markAsInterest(event: Event) {
     this.userService.interestEvent(event).subscribe(() => {
-      this.userService.reloadEvents();
+      this.renderEvent();
     });
   }
 
   removeInterest(event: Event) {
     this.userService.removeInterest(event).subscribe(() => {
-      this.userService.reloadEvents();
+      this.renderEvent(); 
     });
   }
 

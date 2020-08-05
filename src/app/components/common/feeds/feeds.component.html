@@ -1,5 +1,5 @@
 <div class="notification-dashboard">
-    <h1 *ngIf="feeds.length > 0" class="text-center text-white">Feeds</h1>
+    <h1 *ngIf="feeds && feeds.length > 0" class="text-center text-white">Feeds</h1>
     <div *ngFor="let feed of feeds" class="row justify-content-center notification info text-white"
         style="margin: 1em auto;">
         <div class="col-3 col-md-2" style=" border-right: 2px solid white;"><span class="material-icons">

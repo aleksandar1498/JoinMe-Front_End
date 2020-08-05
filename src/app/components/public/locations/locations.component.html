@@ -16,9 +16,9 @@
                     <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.city}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="address">
-                    <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.address}} </mat-cell>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="locationCategory">
                     <mat-header-cell *matHeaderCellDef> Location Category </mat-header-cell>
@@ -44,8 +44,8 @@
                     </mat-cell>
                 </ng-container>
                 <!-- Header and Row Declarations -->
-                <mat-header-row *matHeaderRowDef="['city','address', 'locationCategory','actions']"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: ['city','address', 'locationCategory','actions']"></mat-row>
+                <mat-header-row *matHeaderRowDef="['city','name', 'locationCategory','actions']"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: ['city','name', 'locationCategory','actions']"></mat-row>
             </mat-table>
         </div>
         <div class="col"></div>

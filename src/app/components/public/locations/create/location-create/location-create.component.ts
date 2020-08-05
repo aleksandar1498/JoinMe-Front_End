@@ -18,7 +18,7 @@ export class LocationCreateComponent implements OnInit {
   categories: LocationCategory[];
   createLocationForm = new FormGroup({
     city: new FormControl(''),
-    address: new FormControl(''),
+    name: new FormControl(''),
     locationCategory: new FormControl(null)
   });
   constructor(private _locationService: LocationService, private _router: Router, private errorService: ErrorService, private notificationService: NotificationService) { }

@@ -1,4 +1,4 @@
-<h1>Create Event</h1>
+<h1 class="row-title">Create Event</h1>
 <div class="col-md-4 offset-md-4 mt-2">
     <form [formGroup]="createEventForm">
         <mat-error *ngIf="createEventForm.get('title').errors?.serverError">
@@ -18,7 +18,7 @@
                 <mat-option>-- None --</mat-option>
                 <mat-optgroup *ngFor="let city of locations | keyvalue" [label]="city.key">
                     <mat-option *ngFor="let loc of city.value" [value]="loc">
-                        {{loc.address}}
+                        {{loc.name}}
                     </mat-option>
                 </mat-optgroup>
             </mat-select>
@@ -66,6 +66,6 @@
         </mat-form-field>
 
         <br>
-        <button mat-raised-button class="mt-3" (click)="create()">Create</button>
+        <button mat-raised-button (click)="create()">Create</button>
     </form>
 </div>

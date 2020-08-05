@@ -6,7 +6,8 @@ html, body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    min-width: 250px;
+    font-family: "LatoBlack","Arial","Helvetica",sans-serif;
 }
 
 .invalid-data {
@@ -31,7 +32,14 @@ body {
 .card-img-container {
     min-height: 14em;
 }
-
+.dashboard{
+    min-height: 42%;
+}
+.row-title{
+    background: #9cd7ff;
+    color: white;
+    padding: .3em;
+}
 /*
     Media screens
 */

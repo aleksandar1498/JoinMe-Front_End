@@ -1,4 +1,17 @@
-
-a:hover{
+a:hover {
     text-decoration: none;
+}
+
+.btn-event {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    z-index: 999;
+    background-color: #3578bc;
+    transition: .2s linear;
+    color: white;
+}
+
+.btn-event:hover{
+    background-color: #2a8cee;
 }

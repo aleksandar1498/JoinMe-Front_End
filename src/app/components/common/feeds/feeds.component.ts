@@ -26,9 +26,7 @@ export class FeedsComponent implements OnInit {
 
   private renderFeeds(): void {
     this.feedService.getAllFeeds().subscribe(res => {
-      console.log(res);
       this.feeds = res.filter(f => f.isViewed === false);
-      console.log(res);
     }, err => {
       this.errorService.renderErrors(err);
     });

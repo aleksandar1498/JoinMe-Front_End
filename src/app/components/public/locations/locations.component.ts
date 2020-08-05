@@ -32,6 +32,7 @@ export class LocationsComponent implements OnInit {
   renderLocations() {
     console.log("Called");
     this.locationService.findAllLocations().subscribe((data: Location[]) => {
+      console.log(data);
       this.locations = data;
     });
   }

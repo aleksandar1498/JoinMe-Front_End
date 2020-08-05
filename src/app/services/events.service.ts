@@ -5,11 +5,14 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Event } from '../models/event';
 import { eventMapper } from '../common/mappers/object-mapper';
+import { UserAuth } from '../models/user-auth';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
+
 
   events: BehaviorSubject<Event[]>;
   currentEvents: Observable<Event[]>;
@@ -49,5 +52,10 @@ export class EventsService {
   getEventById(eventId: string): Observable<Event> {
     const url = environment.resturl + '/events/' + eventId;
     return this.http.get<Event>(url);
+  }
+
+  getStatistic(user: User): Observable<any> {
+    const url = environment.resturl + '/stat/user/' + user.id + '/events';
+    return this.http.get<any>(url);
   }
 }
